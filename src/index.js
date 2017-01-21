@@ -10,7 +10,7 @@ var Script2 = {
     // 'async' and 'defer' don't allow document.write according to:
     // http://www.html5rocks.com/en/tutorials/speed/script-loading/
     // we ignore 'defer' and handle 'async' specially.
-    var props = customAttrs.concat(['src', 'type', 'async', 'integrity', 'text', 'crossorigin'])
+    var props = customAttrs.concat(['src', 'type', 'async', 'integrity', 'text', 'crossorigin', 'canvas'])
     Vue.component('script2', {
       props: props,
       // <slot> is important, see: http://vuejs.org/guide/components.html#Named-Slots
@@ -62,6 +62,7 @@ var Script2 = {
       // in code getting executed out of order from how it is inlined on the page.
       s.async = false // therefore set this to false
       s.src = src
+      if(s.canvas)s.setAttribute("canvas",opts.canvas);
       // crossorigin in HTML and crossOrigin in the DOM per HTML spec
       // https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-crossorigin
       s.crossOrigin = opts.crossorigin
